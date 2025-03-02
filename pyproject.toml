@@ -1,0 +1,66 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "cards2pdf"
+dynamic = ["version"]
+description = ''
+readme = "README.md"
+requires-python = ">=3.8"
+license = "MIT"
+keywords = []
+authors = [
+  { name = "U.N. Owen", email = "void@some.where" },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+dependencies = [
+  "click",
+]
+
+[project.urls]
+Documentation = "https://github.com/U.N. Owen/cards2pdf#readme"
+Issues = "https://github.com/U.N. Owen/cards2pdf/issues"
+Source = "https://github.com/U.N. Owen/cards2pdf"
+
+[project.scripts]
+cards2pdf = "cards2pdf.cli:cards2pdf"
+
+[tool.hatch.version]
+path = "src/cards2pdf/__about__.py"
+
+[tool.hatch.envs.types]
+extra-dependencies = [
+  "mypy>=1.0.0",
+]
+[tool.hatch.envs.types.scripts]
+check = "mypy --install-types --non-interactive {args:src/cards2pdf tests}"
+
+[tool.coverage.run]
+source_pkgs = ["cards2pdf", "tests"]
+branch = true
+parallel = true
+omit = [
+  "src/cards2pdf/__about__.py",
+]
+
+[tool.coverage.paths]
+cards2pdf = ["src/cards2pdf", "*/cards2pdf/src/cards2pdf"]
+tests = ["tests", "*/cards2pdf/tests"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]
